@@ -104,7 +104,7 @@ async def register_reading(request: RegisterReading):
 
 
 @app.post("/select/readings", response_model=ReadingsResponse)
-async def register_reading(request: SelectReadings):
+async def select_readings(request: SelectReadings):
     device = (
         supabase.table("moistureSensor").select("*").eq("mac", request.mac).execute()
     )
@@ -133,4 +133,5 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=int(os.getenv("PORT", default="5000")),
         log_level="info",
+        workers=4,
     )
